@@ -7,17 +7,17 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
 
-name: OpenWrt-CI
+name: OpenWrt-CIs第一
 
 on:
   push:
     branches: 
-      - CI-demo
+      - master
   #     ↑↑↑ 改成你的分支名, 一般是master
-  # schedule:
-  #   - cron: 0 20 * * *
-  # release:
-  #   types: [published]
+   schedule:
+     - cron: 0 20 * * *
+   release:
+     types: [published]
 
 jobs:
   build:
@@ -27,7 +27,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
         with:
-          ref: CI-demo
+          ref: master
         #      ↑↑↑ 改成你的分支名, 一般是master
 
       - name: Initialization environment
@@ -104,8 +104,8 @@ jobs:
           # 编译x64固件:
           cat >> .config <<EOF
           CONFIG_TARGET_x86=y
-          CONFIG_TARGET_x86_64=y
-          CONFIG_TARGET_x86_64_Generic=y
+          #CONFIG_TARGET_x86_64=y
+          #CONFIG_TARGET_x86_64_Generic=y
           EOF
 
           # 固件压缩:
@@ -167,6 +167,7 @@ jobs:
           CONFIG_PACKAGE_luci-app-webadmin=y
           CONFIG_PACKAGE_luci-app-wireguard=y
           CONFIG_PACKAGE_luci-app-wrtbwmon=y
+          CONFIG_PACKAGE_luci-app-S-S R-pro=y
           EOF
 
           # LuCI主题:
